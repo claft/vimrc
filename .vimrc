@@ -18,7 +18,6 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
 
 " 入力保管機能を提供するプラグイン（要設定。後で。
-" ruby用の設定やりたい。
 NeoBundle 'Shougo/neocomplcache'
 " 起動時に有効化
 let g:neocomplcache_enable_at_startup = 1
@@ -41,11 +40,17 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-" Enable snipMate compatibility feature.
+" neosnippet有効化 
 let g:neosnippet#enable_snipmate_compatibility = 1
-" Tell Neosnippet about the other snippets
+" snippets用のファイル配置場所指定 
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
+" 補完機能の背景色変更。ctermbg:背景色、guibg:文字色
+" 補完候補popup menu
+hi Pmenu   ctermbg=18 guibg=#ccffcc
+" 補完対象選択時の色
+"hi PmenuSel   ctermbg=7 guibg=Grey
+"hi PmenuSbar  ctermbg=248 guibg=Grey
+"hi PmenuThumb cterm=reverse gui=reverse
 
 " なんかよくわからん。
 NeoBundle 'jpalardy/vim-slime'
