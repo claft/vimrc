@@ -59,4 +59,10 @@ NeoBundle 'scrooloose/syntastic'
 
 filetype plugin indent on     " required!
 filetype indent on
+
+" ステータスライン設定
+set laststatus=2
+" ファイル名、更新有無、行数などの出力設定
+set statusline=%f%m%=%l,%c\ %{'['.(&fenc!=''?&fenc:&enc).']\ ['.&fileformat.']'}
+
 syntax on
