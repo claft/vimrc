@@ -1,7 +1,7 @@
 set nocompatible               " be iMproved
 filetype off
 
-set listchars=tab:»-
+set listchars=tab:»-,trail:-
 set list
 
 if has('vim_starting')
