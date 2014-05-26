@@ -1,6 +1,9 @@
 set nocompatible               " be iMproved
 filetype off
 
+set listchars=tab:»-
+set list
+
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   call neobundle#rc(expand('~/.vim/bundle/'))
