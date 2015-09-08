@@ -4,6 +4,10 @@ filetype off
 set listchars=tab:»-,trail:-
 set list
 
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   call neobundle#rc(expand('~/.vim/bundle/'))
@@ -43,9 +47,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-" neosnippet有効化 
+" neosnippet有効化
 let g:neosnippet#enable_snipmate_compatibility = 1
-" snippets用のファイル配置場所指定 
+" snippets用のファイル配置場所指定
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 " 補完機能の背景色変更。ctermbg:背景色、guibg:文字色
 " 補完候補popup menu
@@ -55,10 +59,37 @@ hi Pmenu   ctermbg=18 guibg=#ccffcc
 "hi PmenuSbar  ctermbg=248 guibg=Grey
 "hi PmenuThumb cterm=reverse gui=reverse
 
-" なんかよくわからん。
+" なんかよくわからん
 NeoBundle 'jpalardy/vim-slime'
-" 自動シンタックスチェック用プラグイン。
+" シンタックスチェック用プラグイン
 NeoBundle 'scrooloose/syntastic'
+" if-endなどの対になる文字を自動で書き出すプラグイン
+NeoBundle 'tpope/vim-endwise'
+
+" ruby on rails 環境用
+NeoBundle 'tpope/vim-rails'
+
+" python環境用
+NeoBundleLazy "davidhalter/jedi-vim", {
+  \ "autoload": {
+  \   "filetypes": ["python", "python3", "djangohtml"],
+  \ },
+  \ "build": {
+  \   "mac": "pip install jedi",
+  \   "unix": "pip install jedi",
+  \ }}
+let s:hooks = neobundle#get_hooks("jedi-vim")
+function! s:hooks.on_source(bundle)
+  " jediにvimの設定を任せると'completeopt+=preview'するので
+  " 自動設定機能をOFFにし手動で設定を行う
+  let g:jedi#auto_vim_configuration = 0
+  " 補完の最初の項目が選択された状態だと使いにくいためオフにする
+  let g:jedi#popup_select_first = 0
+  " quickrunと被るため大文字に変更
+  let g:jedi#rename_command = '<Leader>r'
+  " gundoと被るため大文字に変更
+  let g:jedi#goto_command = '<Leader>g'
+endfunction
 
 filetype plugin indent on     " required!
 filetype indent on
